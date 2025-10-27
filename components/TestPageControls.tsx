@@ -1,12 +1,14 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { RefreshCw } from "lucide-react";
-import Couter from "./Couter";
+import Counter, { CounterRef } from "./Couter";
 
 const TestPageControls = ({
+  counterRef,
   isCapsLockEnabled,
   changeTypeText,
 }: {
+  counterRef: React.RefObject<CounterRef | null>;
   isCapsLockEnabled: boolean | null;
   changeTypeText: () => void;
 }) => {
@@ -16,8 +18,7 @@ const TestPageControls = ({
         className=" hover:bg-slate-800 cursor-pointer"
         onClick={() => {
           changeTypeText();
-        }}
-      >
+        }}>
         <RefreshCw />
         Change Text
       </Button>
@@ -26,8 +27,7 @@ const TestPageControls = ({
         style={{
           textShadow: "2px 3px 20px white",
         }}
-        className="text-2x w-full text-red-400 font-bold"
-      >
+        className="text-2x w-full text-red-400 font-bold">
         <Button
           className={
             `${
@@ -35,12 +35,11 @@ const TestPageControls = ({
                 ? " bg-slate-800 shadow-sm shadow-yellow-200 text-yellow-300 "
                 : "bg-slate-900"
             }` + " hover:bg-slate-800 cursor-pointer"
-          }
-        >
+          }>
           {isCapsLockEnabled ? "Caps Lock On" : "Caps Lock Off"}
         </Button>
       </p>
-      <Couter />
+      <Counter ref={counterRef} />
     </div>
   );
 };

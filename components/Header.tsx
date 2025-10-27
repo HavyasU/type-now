@@ -10,10 +10,6 @@ interface RouteDataElement {
 const Header = () => {
   const routeData: Array<RouteDataElement> = [
     {
-      routeName: "Home",
-      routeLink: "/",
-    },
-    {
       routeName: "Type Test",
       routeLink: "/type-test",
     },

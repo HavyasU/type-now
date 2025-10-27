@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { forwardRef, useImperativeHandle, useState } from "react";
 import { Button } from "./ui/button";
-
-const Couter = () => {
+export interface CounterRef {
+  callStartTimerFunction: () => void;
+}
+const Counter = forwardRef((props, ref) => {
   const [timer, setTimer] = useState(3);
 
   const startTimerFunction = () => {
@@ -16,11 +18,16 @@ const Couter = () => {
     }, 1000);
   };
 
+  useImperativeHandle(ref, () => ({
+    callStartTimerFunction: startTimerFunction,
+  }));
+
   return (
     <div>
       <Button>{timer}s</Button>
     </div>
   );
-};
+});
 
-export default Couter;
+Counter.displayName = "Counter";
+export default Counter;
