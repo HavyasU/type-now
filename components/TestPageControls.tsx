@@ -14,14 +14,14 @@ const TestPageControls = ({
 }) => {
   return (
     <div className="controls my-5 flex justify-between gap-2 ">
-      <Button
+      {/* <Button
         className=" hover:bg-slate-800 cursor-pointer"
         onClick={() => {
           changeTypeText();
         }}>
         <RefreshCw />
         Change Text
-      </Button>
+      </Button> */}
 
       <p
         style={{
