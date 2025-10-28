@@ -39,7 +39,7 @@ const TestPageControls = ({
           {isCapsLockEnabled ? "Caps Lock On" : "Caps Lock Off"}
         </Button>
       </p>
-      <Counter ref={counterRef} />
+      {/* <Counter ref={counterRef} /> */}
     </div>
   );
 };

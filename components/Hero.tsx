@@ -1,13 +1,32 @@
 import React from "react";
 import { Button } from "./ui/button";
-
+import KeyBoardStyle from "./KeyBoardStyle/KeyBoardStyle";
+import Link from "next/link";
 const Hero = () => {
   return (
     <div className="w-full p-5 flex justify-center flex-col items-center h-full">
-      <h3 className="text-3xl mb-5 font-bold">Take Typing Test Now!</h3>
-      <Button className="cursor-pointer" variant={"default"}>
-        Test Now
-      </Button>
+      <KeyBoardStyle />
+      <h1
+        style={{
+          fontSize: "10vw",
+          fontFamily: "cursive",
+          textShadow:
+            "10px 10px 10px black,10px 10px 5px black, 10px 10px 40px cyan",
+        }}>
+        Type-Now
+      </h1>
+      <h3
+        style={{ fontFamily: "monospace" }}
+        className="text-2xl my-6 font-thin font-serif ">
+        Take Your Typing to the Next Level!
+      </h3>
+      <Link href={"type-test"}>
+        <Button
+          className="cursor-pointer  px-10 bg-gray-300 hover:bg-gray-500 text-black rounded-lg font-bold py-6 "
+          variant={"default"}>
+          Test Now
+        </Button>
+      </Link>
     </div>
   );
 };
