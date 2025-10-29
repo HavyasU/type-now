@@ -2,6 +2,11 @@ import { TextDataSet } from "@/components/Data/TextData";
 import { playSound } from "./Playsound.util";
 import React from "react";
 import { RestrictedKeyType } from "@/constants/RestrictedKeys.costants";
+import {
+  CounterRefInterface,
+  typingStatusType,
+} from "@/constants/typing.constants";
+import { CounterRef } from "@/components/Couter";
 
 export const changeTypeText = (
   letterIndexRef: React.MutableRefObject<number>,
@@ -21,6 +26,9 @@ interface keyDownEventHandlerParameters {
   setVisibleIndex: React.Dispatch<React.SetStateAction<number>>;
   setKeyPressed: React.Dispatch<React.SetStateAction<string>>;
   TextContent: string;
+  typingStatus: typingStatusType;
+  setTypingStatus: React.Dispatch<React.SetStateAction<typingStatusType>>;
+  counterRef: React.RefObject<CounterRef | null>;
 }
 
 export const keyDownEventHandler = ({
@@ -31,6 +39,9 @@ export const keyDownEventHandler = ({
   setVisibleIndex,
   setKeyPressed,
   TextContent,
+  typingStatus,
+  setTypingStatus,
+  counterRef,
 }: keyDownEventHandlerParameters) => {
   const isKeyExists = restrictedKeys.some((ele) => ele == e.key);
   setIsCapsLockEnabled(e.getModifierState("CapsLock"));

@@ -5,7 +5,6 @@ const KeyLetters = ({ letter }: { letter: string }) => {
     <h1
       style={{
         fontSize: "5vw",
-        fontFamily: "cursive",
         textShadow: "10px 10px 10px black, 10px 10px 40px cyan",
         position: "absolute",
         // top:,

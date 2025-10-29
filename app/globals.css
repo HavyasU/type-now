@@ -1,6 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -117,8 +117,30 @@
     @apply border-border outline-ring/50;
   }
   body {
+    font-family: "Parkinsans", sans-serif;
     @apply bg-background text-foreground;
   }
+}
+
+.parkinsans-font {
+  font-family: "Parkinsans", sans-serif;
+}
+.playfair-font {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+}
+.text-glow {
+  text-shadow:
+    10px 10px 10px black,
+    10px 10px 10px rgb(13, 12, 12),
+    10px 10px 40px rgb(255, 252, 244);
+}
+
+.text-glow-gold {
+  text-shadow:
+    10px 10px 10px black,
+    10px 10px 10px rgb(13, 12, 12),
+    10px 10px 40px rgb(255, 208, 81);
 }
 
 body {

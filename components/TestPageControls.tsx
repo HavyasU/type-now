@@ -1,19 +1,20 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { RefreshCw } from "lucide-react";
-import Counter, { CounterRef } from "./Couter";
+import Counter from "./Couter";
+import { CounterRefInterface } from "@/constants/typing.constants";
 
 const TestPageControls = ({
   counterRef,
   isCapsLockEnabled,
   changeTypeText,
 }: {
-  counterRef: React.RefObject<CounterRef | null>;
+  counterRef: React.RefObject<CounterRefInterface | null>;
   isCapsLockEnabled: boolean | null;
   changeTypeText: () => void;
 }) => {
   return (
-    <div className="controls my-5 flex justify-between gap-2 ">
+    <div className="controls my-5 flex flex-row items-start justify-start gap-2 ">
       {/* <Button
         className=" hover:bg-slate-800 cursor-pointer"
         onClick={() => {
@@ -23,11 +24,11 @@ const TestPageControls = ({
         Change Text
       </Button> */}
 
-      <p
+      <div
         style={{
           textShadow: "2px 3px 20px white",
         }}
-        className="text-2x w-full text-red-400 font-bold">
+        className="text-2x text-red-400 font-bold">
         <Button
           className={
             `${
@@ -38,8 +39,8 @@ const TestPageControls = ({
           }>
           {isCapsLockEnabled ? "Caps Lock On" : "Caps Lock Off"}
         </Button>
-      </p>
-      {/* <Counter ref={counterRef} /> */}
+      </div>
+      <Counter ref={counterRef} />
     </div>
   );
 };

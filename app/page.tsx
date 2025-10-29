@@ -1,15 +1,11 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import Hero from "@/components/Hero";
-import Image from "next/image";
+// import Image from "next/image";
 const page = () => {
   return (
     <div className="">
-      <div
-        style={{
-          background: "url('assets/images/bg.png')  ",
-        }}
-        className="w-full   select-none min-h-[90vh] flex flex-col justify-center items-center">
+      <div className="w-full   select-none min-h-[90vh] flex flex-col justify-center items-center">
         <Hero />
       </div>
       {/* <div className="footer bg-black p-4 w-full flex justify-between items-start ">

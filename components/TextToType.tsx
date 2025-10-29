@@ -7,15 +7,16 @@ import {
   // getRandomNumber,
   keyDownEventHandler,
 } from "@/utils/TypetestPage.utils";
-import { CounterRef } from "./Couter";
 import { restrictedKeysData } from "@/constants/RestrictedKeys.costants";
 import { getColoredText } from "./ColoredTextComponent";
+import { typingStatusType } from "@/constants/typing.constants";
+import { CounterRef } from "./Couter";
 
 const TextToType = () => {
   const [random, setRandom] = useState<number>(0);
   const [TextContent, setTextContent] = useState(TextDataSet[random].content);
   const letterIndexRef = useRef(-1);
-  const counterRef = useRef<CounterRef>(null);
+  const counterRef = useRef<CounterRef | null>(null);
 
   const [visibleIndex, setVisibleIndex] = useState<number>(-1);
   const [keyPressed, setKeyPressed] = useState<string>("");
@@ -23,6 +24,8 @@ const TextToType = () => {
     false,
   );
 
+  const [typingStatus, setTypingStatus] =
+    useState<typingStatusType>("no-started");
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       keyDownEventHandler({
@@ -33,6 +36,9 @@ const TextToType = () => {
         setKeyPressed,
         setVisibleIndex,
         TextContent,
+        typingStatus,
+        setTypingStatus,
+        counterRef,
       });
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -53,11 +59,7 @@ const TextToType = () => {
         isCapsLockEnabled={isCapsLockEnabled}
         changeTypeText={changeTypeTextHandler}
       />
-      <div
-        style={{
-          fontFamily: "cursive",
-        }}
-        className="text-white select-none p-6 rounded-md bg-zinc-900   text-justify my-4  font-serif font-semibold  text-2xl  ">
+      <div className="text-white select-none p-6 rounded-md bg-zinc-900   text-justify my-4  font-serif font-semibold  text-2xl  ">
         <h3 className="tracking-wide select-none min-h-1/2 leading-16 ">
           {getColoredText(TextContent, visibleIndex, letterIndexRef)}
         </h3>

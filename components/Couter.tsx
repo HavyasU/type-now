@@ -22,11 +22,7 @@ const Counter = forwardRef((props, ref) => {
     callStartTimerFunction: startTimerFunction,
   }));
 
-  return (
-    <div>
-      <Button>{timer}s</Button>
-    </div>
-  );
+  return <Button>{timer}s</Button>;
 });
 
 Counter.displayName = "Counter";
