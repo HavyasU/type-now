@@ -25,7 +25,7 @@ interface keyDownEventHandlerParameters {
   setIsCapsLockEnabled: React.Dispatch<React.SetStateAction<boolean | null>>;
   updateLetterIndex: (value: number) => void;
   setKeyPressed: React.Dispatch<React.SetStateAction<string>>;
-  TextContent: string;
+  textContent: string;
   typingStatus: typingStatusType;
   setTypingStatus: React.Dispatch<React.SetStateAction<typingStatusType>>;
   counterRef: React.RefObject<CounterRef | null>;
@@ -37,7 +37,7 @@ export const keyDownEventHandler = ({
   letterIndexRef,
   setIsCapsLockEnabled,
   setKeyPressed,
-  TextContent,
+  textContent,
   typingStatus,
   setTypingStatus,
   updateLetterIndex,
@@ -51,8 +51,8 @@ export const keyDownEventHandler = ({
   } else {
     if (!isKeyExists) {
       setKeyPressed(e?.key);
-      if (e.key == TextContent[letterIndexRef.current + 1]) {
-        if (letterIndexRef.current == 0) {
+      if (e.key == textContent[letterIndexRef.current + 1]) {
+        if (letterIndexRef.current == -1) {
           counterRef.current?.callStartTimerFunction();
         }
         // check if typed key is same as current letter of text
@@ -66,7 +66,7 @@ export const keyDownEventHandler = ({
 };
 
 export const getRandomNumber = (length: number) => {
-  return 0;
+  // return 0;
   // const random = Math.floor(Math.random() * length);
-  // return random;
+  return 7;
 };

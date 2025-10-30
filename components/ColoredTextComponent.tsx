@@ -4,12 +4,12 @@ import clsx from "clsx";
 import { useMemo } from "react";
 
 interface GetColoredTextProps {
-  TextContent: string;
+  textContent: string;
   visibleIndex: number;
   letterIndexRef: React.MutableRefObject<number>;
 }
 const GetColoredText = ({
-  TextContent,
+  textContent,
   letterIndexRef,
   visibleIndex,
 }: GetColoredTextProps) => {
@@ -22,7 +22,7 @@ const GetColoredText = ({
   // );
   return (
     <>
-      {TextContent.split("").map((letter, index) => {
+      {textContent.split("").map((letter, index) => {
         const isTyped = index <= visibleIndex;
 
         // Cursor logic — only activate cursor highlight on the client

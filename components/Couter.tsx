@@ -1,15 +1,31 @@
-import React, { forwardRef, useImperativeHandle, useState } from "react";
+"use client";
+import React, {
+  forwardRef,
+  useContext,
+  useImperativeHandle,
+  useState,
+} from "react";
 import { Button } from "./ui/button";
+import { TypingContext } from "@/context/TypingTestContext/TypingTestContext";
+import { useRouter } from "next/navigation";
 export interface CounterRef {
   callStartTimerFunction: () => void;
 }
 const Counter = forwardRef((props, ref) => {
+  const router = useRouter();
   const [timer, setTimer] = useState(30);
+  const { textContent, setResults, letterIndexRef } = useContext(TypingContext);
+  const calculateResult = () => {
+    const wpm = letterIndexRef.current / 5 / 0.5;
+    setResults(wpm, 0);
+    router.push("/type-test/result");
+  };
 
   const startTimerFunction = () => {
     const timeInterval = setInterval(() => {
       setTimer((prevTime) => {
         if (prevTime == 0) {
+          calculateResult();
           clearInterval(timeInterval);
           setTimer(30);
           return 0;
