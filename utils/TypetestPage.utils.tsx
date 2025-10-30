@@ -23,7 +23,7 @@ interface keyDownEventHandlerParameters {
   restrictedKeys: readonly RestrictedKeyType[];
   letterIndexRef: React.MutableRefObject<number>;
   setIsCapsLockEnabled: React.Dispatch<React.SetStateAction<boolean | null>>;
-  setVisibleIndex: React.Dispatch<React.SetStateAction<number>>;
+  updateLetterIndex: (value: number) => void;
   setKeyPressed: React.Dispatch<React.SetStateAction<string>>;
   TextContent: string;
   typingStatus: typingStatusType;
@@ -36,30 +36,28 @@ export const keyDownEventHandler = ({
   restrictedKeys,
   letterIndexRef,
   setIsCapsLockEnabled,
-  setVisibleIndex,
   setKeyPressed,
   TextContent,
   typingStatus,
   setTypingStatus,
+  updateLetterIndex,
   counterRef,
 }: keyDownEventHandlerParameters) => {
   const isKeyExists = restrictedKeys.some((ele) => ele == e.key);
   setIsCapsLockEnabled(e.getModifierState("CapsLock"));
   if (e.key === "Backspace") {
-    setVisibleIndex((prev) => {
-      const newIndex = Math.max(prev - 1, -1);
-      letterIndexRef.current = newIndex;
-      return newIndex;
-    });
+    const newIndex = Math.max(letterIndexRef.current - 1, -1);
+    updateLetterIndex(newIndex);
   } else {
     if (!isKeyExists) {
       setKeyPressed(e?.key);
       if (e.key == TextContent[letterIndexRef.current + 1]) {
+        if (letterIndexRef.current == 0) {
+          counterRef.current?.callStartTimerFunction();
+        }
+        // check if typed key is same as current letter of text
         playSound("/assets/audios/type-sound.mp3");
-        setVisibleIndex((prev) => {
-          letterIndexRef.current = prev + 1;
-          return prev + 1;
-        });
+        updateLetterIndex(letterIndexRef.current + 1);
         e.preventDefault();
       } else {
       }

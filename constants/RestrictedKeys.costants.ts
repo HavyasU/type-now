@@ -47,6 +47,8 @@ export const restrictedKeysData = [
   "F10",
   "F11",
   "F12",
+  "AudioVolumeDown",
+  "AudioVolumeUp",
 ] as const;
 
 export type RestrictedKeyType = (typeof restrictedKeysData)[number];

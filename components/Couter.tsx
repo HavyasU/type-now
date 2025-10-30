@@ -4,13 +4,14 @@ export interface CounterRef {
   callStartTimerFunction: () => void;
 }
 const Counter = forwardRef((props, ref) => {
-  const [timer, setTimer] = useState(3);
+  const [timer, setTimer] = useState(30);
 
   const startTimerFunction = () => {
     const timeInterval = setInterval(() => {
       setTimer((prevTime) => {
         if (prevTime == 0) {
           clearInterval(timeInterval);
+          setTimer(30);
           return 0;
         }
         return prevTime - 1;
@@ -22,7 +23,7 @@ const Counter = forwardRef((props, ref) => {
     callStartTimerFunction: startTimerFunction,
   }));
 
-  return <Button>{timer}s</Button>;
+  return <Button className="text-3xl px-5 py-3">{timer}s</Button>;
 });
 
 Counter.displayName = "Counter";
