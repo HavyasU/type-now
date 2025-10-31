@@ -8,23 +8,39 @@ import React, {
 } from "react";
 
 export interface TypingContextValueType {
-  wpm: number;
-  accuracy: number;
-  setResults: (wpm: number, accuracy: number) => void;
-  textContent: string;
-  setTextContent: Dispatch<SetStateAction<string>>;
-  visibleIndex: number;
-  setVisibleIndex: Dispatch<SetStateAction<number>>;
-  letterIndexRef: MutableRefObject<number>;
+  context: {
+    wpm: number;
+    accuracy: number;
+    textContent: string;
+    visibleIndex: number;
+    wrongLetterIndex: number[];
+  };
+  actions: {
+    setResults: (wpm: number, accuracy: number) => void;
+    setTextContent: Dispatch<SetStateAction<string>>;
+    setVisibleIndex: Dispatch<SetStateAction<number>>;
+    updateWrongLetterIndex: (value: number) => void;
+  };
+  ref: {
+    letterIndexRef: MutableRefObject<number>;
+  };
 }
 
 export const TypingContext = createContext<TypingContextValueType>({
-  wpm: 0,
-  accuracy: 0,
-  setResults: () => {},
-  textContent: "",
-  setTextContent: () => {},
-  visibleIndex: 0,
-  setVisibleIndex: () => {},
-  letterIndexRef: { current: -1 },
+  context: {
+    wpm: 0,
+    accuracy: 0,
+    visibleIndex: 0,
+    textContent: "",
+    wrongLetterIndex: [],
+  },
+  actions: {
+    setResults: () => {},
+    setTextContent: () => {},
+    setVisibleIndex: () => {},
+    updateWrongLetterIndex: () => {},
+  },
+  ref: {
+    letterIndexRef: { current: -1 },
+  },
 });

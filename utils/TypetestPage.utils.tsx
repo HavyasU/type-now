@@ -7,6 +7,8 @@ import {
   typingStatusType,
 } from "@/constants/typing.constants";
 import { CounterRef } from "@/components/Couter";
+import { useTypeContext } from "@/context/TypingTestContext/TypingTestContextProvider";
+import keyDownEventHandlerParameters from "@/Types/TypingTest.types";
 
 export const changeTypeText = (
   letterIndexRef: React.MutableRefObject<number>,
@@ -18,31 +20,22 @@ export const changeTypeText = (
   letterIndexRef.current = -1;
 };
 
-interface keyDownEventHandlerParameters {
-  e: KeyboardEvent;
-  restrictedKeys: readonly RestrictedKeyType[];
-  letterIndexRef: React.MutableRefObject<number>;
-  setIsCapsLockEnabled: React.Dispatch<React.SetStateAction<boolean | null>>;
-  updateLetterIndex: (value: number) => void;
-  setKeyPressed: React.Dispatch<React.SetStateAction<string>>;
-  textContent: string;
-  typingStatus: typingStatusType;
-  setTypingStatus: React.Dispatch<React.SetStateAction<typingStatusType>>;
-  counterRef: React.RefObject<CounterRef | null>;
-}
-
 export const keyDownEventHandler = ({
-  e,
-  restrictedKeys,
-  letterIndexRef,
-  setIsCapsLockEnabled,
-  setKeyPressed,
-  textContent,
-  typingStatus,
-  setTypingStatus,
-  updateLetterIndex,
-  counterRef,
+  actions,
+  context,
+  events,
+  refs,
 }: keyDownEventHandlerParameters) => {
+  const {
+    setIsCapsLockEnabled,
+    setKeyPressed,
+    setTypingStatus,
+    updateLetterIndex,
+  } = actions;
+
+  const { restrictedKeys, textContent, typingStatus } = context;
+  const { e } = events;
+  const { counterRef, letterIndexRef } = refs;
   const isKeyExists = restrictedKeys.some((ele) => ele == e.key);
   setIsCapsLockEnabled(e.getModifierState("CapsLock"));
   if (e.key === "Backspace") {

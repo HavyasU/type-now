@@ -17,11 +17,9 @@ const TextToType = () => {
   const counterRef = useRef<CounterRef | null>(null);
 
   const {
-    textContent,
-    setTextContent,
-    letterIndexRef,
-    setVisibleIndex,
-    visibleIndex,
+    context: { visibleIndex, textContent },
+    ref: { letterIndexRef },
+    actions: { setVisibleIndex, setTextContent },
   } = useTypeContext();
 
   const [keyPressed, setKeyPressed] = useState<string>("");
@@ -39,16 +37,24 @@ const TextToType = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       keyDownEventHandler({
-        e,
-        restrictedKeys: restrictedKeysData,
-        letterIndexRef,
-        updateLetterIndex,
-        setIsCapsLockEnabled,
-        setKeyPressed,
-        textContent,
-        typingStatus,
-        setTypingStatus,
-        counterRef,
+        events: {
+          e,
+        },
+        actions: {
+          setIsCapsLockEnabled,
+          setKeyPressed,
+          setTypingStatus,
+          updateLetterIndex,
+        },
+        context: {
+          restrictedKeys: restrictedKeysData,
+          textContent,
+          typingStatus,
+        },
+        refs: {
+          counterRef,
+          letterIndexRef,
+        },
       });
     };
     window.addEventListener("keydown", handleKeyDown);

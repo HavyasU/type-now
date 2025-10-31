@@ -24,20 +24,32 @@ export const TypingContextProvider = ({
   });
   const [visibleIndex, setVisibleIndex] = useState<number>(-1);
   const letterIndexRef = useRef(-1);
+  const [wrongLetterIndex, setWrongLetterIndex] = useState<Array<number>>([]);
 
   const setResults = (wpm: number, accuracy: number) => {
     setAccuracy(accuracy);
     setWpm(wpm);
   };
+  const updateWrongLetterIndex = (value: number) => {
+    setWrongLetterIndex((prev) => [...prev, value]);
+  };
   const values: TypingContextValueType = {
-    wpm,
-    accuracy,
-    setResults,
-    textContent,
-    setTextContent,
-    visibleIndex,
-    setVisibleIndex,
-    letterIndexRef,
+    actions: {
+      setResults,
+      setTextContent,
+      setVisibleIndex,
+      updateWrongLetterIndex,
+    },
+    context: {
+      accuracy,
+      textContent,
+      visibleIndex,
+      wpm,
+      wrongLetterIndex,
+    },
+    ref: {
+      letterIndexRef,
+    },
   };
   return (
     <TypingContext.Provider value={values}>{children}</TypingContext.Provider>
