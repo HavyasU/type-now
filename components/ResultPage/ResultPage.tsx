@@ -5,7 +5,9 @@ import { useRouter } from "next/navigation";
 import React, { useLayoutEffect } from "react";
 
 const ResultPage = () => {
-  const { accuracy, wpm } = useTypeContext();
+  const {
+    context: { wpm, accuracy },
+  } = useTypeContext();
   const router = useRouter();
 
   useLayoutEffect(() => {

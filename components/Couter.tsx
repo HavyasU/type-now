@@ -14,11 +14,15 @@ export interface CounterRef {
 const Counter = forwardRef((props, ref) => {
   const router = useRouter();
   const [timer, setTimer] = useState(30);
-  const { textContent, setResults, letterIndexRef } = useContext(TypingContext);
+  const {
+    actions: { setResults },
+    context: { textContent },
+    ref: { letterIndexRef },
+  } = useContext(TypingContext);
   const calculateResult = () => {
-    const wpm = letterIndexRef.current / 5 / 0.5;
+    const wpm = letterIndexRef?.current / 5 / 0.5;
     setResults(wpm, 0);
-    router.push("/type-test/result");
+    router?.push("/type-test/result");
   };
 
   const startTimerFunction = () => {
