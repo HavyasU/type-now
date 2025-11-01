@@ -1,4 +1,4 @@
-import { CounterRef } from "@/components/Couter";
+import { CounterRef } from "@/components/Counter";
 import { RestrictedKeyType } from "@/constants/RestrictedKeys.costants";
 import { typingStatusType } from "@/constants/typing.constants";
 
@@ -10,6 +10,7 @@ interface contextInterface {
   textContent: string;
   restrictedKeys: readonly RestrictedKeyType[];
   typingStatus: typingStatusType;
+  wrongLetterIndex: number[];
 }
 
 interface refInterface {
@@ -22,6 +23,7 @@ interface actionInterface {
   updateLetterIndex: (value: number) => void;
   setKeyPressed: React.Dispatch<React.SetStateAction<string>>;
   setTypingStatus: React.Dispatch<React.SetStateAction<typingStatusType>>;
+  updateWrongLetterIndex: (value: number) => void;
 }
 
 export default interface keyDownEventHandlerParameters {
@@ -30,3 +32,6 @@ export default interface keyDownEventHandlerParameters {
   refs: refInterface;
   actions: actionInterface;
 }
+
+
+

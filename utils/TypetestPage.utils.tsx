@@ -1,13 +1,6 @@
 import { TextDataSet } from "@/components/Data/TextData";
 import { playSound } from "./Playsound.util";
 import React from "react";
-import { RestrictedKeyType } from "@/constants/RestrictedKeys.costants";
-import {
-  CounterRefInterface,
-  typingStatusType,
-} from "@/constants/typing.constants";
-import { CounterRef } from "@/components/Couter";
-import { useTypeContext } from "@/context/TypingTestContext/TypingTestContextProvider";
 import keyDownEventHandlerParameters from "@/Types/TypingTest.types";
 
 export const changeTypeText = (
@@ -29,11 +22,11 @@ export const keyDownEventHandler = ({
   const {
     setIsCapsLockEnabled,
     setKeyPressed,
-    setTypingStatus,
     updateLetterIndex,
+    updateWrongLetterIndex,
   } = actions;
 
-  const { restrictedKeys, textContent, typingStatus } = context;
+  const { restrictedKeys, textContent } = context;
   const { e } = events;
   const { counterRef, letterIndexRef } = refs;
   const isKeyExists = restrictedKeys.some((ele) => ele == e.key);
@@ -42,23 +35,29 @@ export const keyDownEventHandler = ({
     const newIndex = Math.max(letterIndexRef.current - 1, -1);
     updateLetterIndex(newIndex);
   } else {
-    if (!isKeyExists) {
+    
+  }
+  if (!isKeyExists) {
+      const nextIndex = letterIndexRef.current + 1;
       setKeyPressed(e?.key);
-      if (e.key == textContent[letterIndexRef.current + 1]) {
-        if (letterIndexRef.current == -1) {
-          counterRef.current?.callStartTimerFunction();
+      
+      if (nextIndex < textContent.length) {
+        if (e.key === textContent[nextIndex]) {
+          if (letterIndexRef.current == -1) {
+            counterRef.current?.callStartTimerFunction();
+          }
+          playSound("/assets/audios/type-sound.mp3");
+          updateLetterIndex(nextIndex);
+        } else {
+          updateWrongLetterIndex(nextIndex);
+          setKeyPressed(e.key); // Keep wrong key displayed
         }
-        // check if typed key is same as current letter of text
-        playSound("/assets/audios/type-sound.mp3");
-        updateLetterIndex(letterIndexRef.current + 1);
         e.preventDefault();
-      } else {
       }
     }
-  }
 };
 
-export const getRandomNumber = (length: number) => {
+export const getRandomNumber = () => {
   // return 0;
   // const random = Math.floor(Math.random() * length);
   return 7;

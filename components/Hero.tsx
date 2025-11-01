@@ -1,11 +1,9 @@
 import React from "react";
 import { Button } from "./ui/button";
-import KeyBoardStyle from "./KeyBoardStyle/KeyBoardStyle";
 import Link from "next/link";
 const Hero = () => {
   return (
     <div className="w-full p-5 flex justify-center flex-col items-center h-full">
-      <KeyBoardStyle />
       <div className="w-2/3 text-center">
         <h1 className="parkinsans-font text-glow font-bold text-6xl">
           Type Fast, Stay Sharp,{" "}

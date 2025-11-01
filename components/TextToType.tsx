@@ -8,23 +8,24 @@ import {
 } from "@/utils/TypetestPage.utils";
 import { restrictedKeysData } from "@/constants/RestrictedKeys.costants";
 import { typingStatusType } from "@/constants/typing.constants";
-import { CounterRef } from "./Couter";
+import { CounterRef } from "./Counter";
 import GetColoredText from "./ColoredTextComponent";
 import { useTypeContext } from "@/context/TypingTestContext/TypingTestContextProvider";
 
 const TextToType = () => {
-  const [random, setRandom] = useState<number>(0);
+  // const [random, setRandom] = useState<number>(0);
   const counterRef = useRef<CounterRef | null>(null);
 
   const {
-    context: { visibleIndex, textContent },
+    context: { visibleIndex, textContent, wrongLetterIndex },
     ref: { letterIndexRef },
-    actions: { setVisibleIndex, setTextContent },
+
+    actions: { setVisibleIndex, setTextContent, updateWrongLetterIndex },
   } = useTypeContext();
 
   const [keyPressed, setKeyPressed] = useState<string>("");
   const [isCapsLockEnabled, setIsCapsLockEnabled] = useState<boolean | null>(
-    false,
+    false
   );
 
   const updateLetterIndex = (value: number) => {
@@ -45,11 +46,13 @@ const TextToType = () => {
           setKeyPressed,
           setTypingStatus,
           updateLetterIndex,
+          updateWrongLetterIndex,
         },
         context: {
           restrictedKeys: restrictedKeysData,
           textContent,
           typingStatus,
+          wrongLetterIndex,
         },
         refs: {
           counterRef,
@@ -102,6 +105,11 @@ const TextToType = () => {
               </p>
             </div>
           )}
+
+          {wrongLetterIndex.map((ele, index) => {
+            return <div key={index}>{textContent[ele]}</div>;
+          })}
+          {wrongLetterIndex.length}
         </h2>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { RefreshCw } from "lucide-react";
-import Counter from "./Couter";
+import Counter from "./Counter";
 import { CounterRefInterface } from "@/constants/typing.constants";
 
 const TestPageControls = ({

@@ -1,7 +1,6 @@
 "use client";
 
 import clsx from "clsx";
-import { useMemo } from "react";
 
 interface GetColoredTextProps {
   textContent: string;
@@ -10,7 +9,6 @@ interface GetColoredTextProps {
 }
 const GetColoredText = ({
   textContent,
-  letterIndexRef,
   visibleIndex,
 }: GetColoredTextProps) => {
   // Ensure this code only runs after the component is mounted (client-side)
