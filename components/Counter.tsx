@@ -83,8 +83,7 @@ const Counter = forwardRef((props, ref) => {
   }));
 
   return <div>
-    <Button className="text-3xl px-5 py-3">{timer}s</Button>
-    {wrongLetterIndex.length}
+    <Button   className="text-xl text-yellow-400 font-bold">{timer}s</Button>
   </div>;
 });
 

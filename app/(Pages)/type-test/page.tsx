@@ -3,7 +3,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="flex flex-col justify-center items-center w-full ">
+    <div className="flex flex-col h-full w-full ">
       <TextToType />
     </div>
   );

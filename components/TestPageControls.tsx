@@ -14,21 +14,26 @@ const TestPageControls = ({
   changeTypeText: () => void;
 }) => {
   return (
-    <div className="controls my-5 flex flex-row items-start justify-start gap-2 ">
-      {/* <Button
+    <div className="controls  items-center justify-center flex gap-2  h-1/5 w-full  ">
+       <div className="">
+        <Counter
+        ref={counterRef}
+      />
+      </div>
+      <Button
         className=" hover:bg-slate-800 cursor-pointer"
         onClick={() => {
           changeTypeText();
         }}>
         <RefreshCw />
         Change Text
-      </Button> */}
+      </Button>
 
       <div
         style={{
           textShadow: "2px 3px 20px white",
         }}
-        className="text-2x text-red-400 font-bold">
+        className="text-2xl text-red-400 font-bold">
         <Button
           className={
             `${
@@ -40,9 +45,7 @@ const TestPageControls = ({
           {isCapsLockEnabled ? "Caps Lock On" : "Caps Lock Off"}
         </Button>
       </div>
-      <Counter
-        ref={counterRef}
-      />
+     
     </div>
   );
 };

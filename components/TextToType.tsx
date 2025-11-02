@@ -71,15 +71,46 @@ const TextToType = () => {
     changeTypeText(letterIndexRef, setTextContent, setVisibleIndex);
   };
 
+  useEffect(() => {
+    console.log(keyPressed)
+  }, [keyPressed])
+
   return (
-    <div className="px-16">
-      <TestPageControls
-        counterRef={counterRef}
-        isCapsLockEnabled={isCapsLockEnabled}
-        changeTypeText={changeTypeTextHandler}
-      />
-      <div className="text-white select-none p-6 rounded-md bg-zinc-900   text-justify my-4  font-serif font-semibold  text-2xl  ">
-        <h3 className="tracking-wide select-none min-h-1/2 leading-16 ">
+    <div className="px-10  h-[80vh] w-full flex flex-col justify-center items-center ">
+      <div className="w-full  h-1/5 flex gap-5 flex-col justify-center items-center    ">
+        <div className="h-1/2 w-full">
+           <TestPageControls
+          counterRef={counterRef} 
+          isCapsLockEnabled={isCapsLockEnabled}
+          changeTypeText={changeTypeTextHandler}
+        />
+        </div>
+        <div className="flex flex-col justify-center select-none h-1/2  items-center overflow-hidden">
+          <h2 className="text-2xl  ">
+            {keyPressed && keyPressed !== textContent[visibleIndex + 1] && (
+              <div className="text-center flex min-h-14 justify-center items-center  gap-3 ">
+                <div className="text-white text-2xl rounded-lg  h-10 w-full px-5 text-center items-center flex justify-center  bg-red-500 font-bold">
+                  <p> {keyPressed == " " ? " Space " : " " + keyPressed + " "}</p>
+                </div>
+                <div className="text-white text-2xl rounded-lg h-10 w-full  px-5 text-center items-center flex justify-center  bg-green-500 font-bold">
+
+                  <p>  {textContent[visibleIndex + 1] == " "
+                    ? " Space "
+                    : " " + textContent[visibleIndex + 1] + ""}</p>
+                </div>
+              </div>
+            )}
+
+
+          </h2>
+        </div>
+      </div>
+      <div className="text-white select-none p-6 rounded-md  montserrat-font   text-justify   font-serif font-semibold  text-2xl  ">
+        <h3 style={
+          {
+            letterSpacing: "4px"
+          }
+        } className=" px-28 tracking-wider select-none min-h-1/2 leading-14 ">
           {/* {getColoredText(textContent, visibleIndex, letterIndexRef)} */}
 
           <GetColoredText
@@ -89,29 +120,7 @@ const TextToType = () => {
           />
         </h3>
       </div>
-      <div className="flex flex-col justify-center select-none  items-center w-full overflow-hidden">
-        <h2 className="text-2xl  ">
-          {keyPressed && keyPressed != textContent[visibleIndex] && (
-            <div className="text-center">
-              <p className="text-red-400  mt-2 font-bold">
-                Wrong key!
-                {keyPressed == " " ? " Space " : " (" + keyPressed + ") "}
-              </p>
-              <p className="text-green-200 font-semibold ">
-                Please Press
-                {textContent[visibleIndex + 1] == " "
-                  ? " (Space) "
-                  : " (" + textContent[visibleIndex + 1] + ") "}
-              </p>
-            </div>
-          )}
 
-          {wrongLetterIndex.map((ele, index) => {
-            return <div key={index}>{textContent[ele]}</div>;
-          })}
-          {wrongLetterIndex.length}
-        </h2>
-      </div>
     </div>
   );
 };

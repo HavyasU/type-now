@@ -1,6 +1,6 @@
 import { TextDataSet } from "@/components/Data/TextData";
 import { playSound } from "./Playsound.util";
-import React from "react";
+import React, { useEffect } from "react";
 import keyDownEventHandlerParameters from "@/Types/TypingTest.types";
 
 export const changeTypeText = (
@@ -37,25 +37,28 @@ export const keyDownEventHandler = ({
   } else {
     
   }
+  
   if (!isKeyExists) {
       const nextIndex = letterIndexRef.current + 1;
-      setKeyPressed(e?.key);
+      setKeyPressed(e.key);
       
       if (nextIndex < textContent.length) {
         if (e.key === textContent[nextIndex]) {
           if (letterIndexRef.current == -1) {
             counterRef.current?.callStartTimerFunction();
           }
-          playSound("/assets/audios/type-sound.mp3");
+          playSound("/assets/audios/type-sound.wav");
           updateLetterIndex(nextIndex);
+          setKeyPressed(textContent[nextIndex+1]);
         } else {
           updateWrongLetterIndex(nextIndex);
-          setKeyPressed(e.key); // Keep wrong key displayed
+          setKeyPressed(e.key);
         }
         e.preventDefault();
       }
     }
 };
+
 
 export const getRandomNumber = () => {
   // return 0;

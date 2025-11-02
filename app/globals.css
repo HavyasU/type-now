@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Parkinsans:wght@300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
@@ -123,11 +123,14 @@
 }
 
 .parkinsans-font {
-  font-family: "Parkinsans", sans-serif;
+  font-family: "Parkinsans", sans-serif !important;
 }
 .playfair-font {
   font-family: "Playfair Display", serif;
-  font-optical-sizing: auto;
+}
+
+.montserrat-font {
+  font-family: "Montserrat", sans-serif !important;
 }
 .text-glow {
   text-shadow:
@@ -146,6 +149,7 @@
 body {
   background-color: #09090b;
   color: white !important;
+  /* margin-top: 5rem; */
 }
 .cursor {
   position: relative;
@@ -175,4 +179,15 @@ body {
   100% {
     transform: scaleY(1);
   }
+}
+
+
+
+.timer{
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 50%;
+  border: 3px solid rgb(255, 255, 98);
 }
