@@ -4,33 +4,33 @@ interface TextDataSetElementSchema {
 
 export const TextDataSet: Array<TextDataSetElementSchema> = [
   {
-    content: `The sun rose over the quiet town, casting golden light across the streets and parks. People began their morning routines with smiles and greetings. Dogs barked softly as children ran to school, carrying books and backpacks. The aroma of fresh bread wafted from the local bakery, inviting neighbors to start their day together. Each corner seemed alive with simple joy and gentle motion, a perfect start to a peaceful day.`,
+    content: `The sun rose over the quiet town as golden light touched every street. People greeted one another while the smell of fresh bread drifted from the bakery. A calm joy filled the morning air, marking the start of a peaceful day. Birds chirped softly as the town slowly came to life with gentle warmth.`,
   },
   {
-    content: `Rain began to fall lightly on the city, creating a soft rhythm on rooftops and sidewalks. Umbrellas opened like colorful mushrooms, and the streets shimmered under the reflection of lights. People hurried to their destinations while street musicians played melodies that lifted spirits. Inside cozy cafés, the scent of coffee and pastries welcomed those escaping the drizzle. Even a brief storm brought a quiet sense of beauty and rhythm to the bustling city.`,
+    content: `Raindrops danced on rooftops and sidewalks as umbrellas bloomed across the city. Cafes glowed with warmth, filled with coffee and laughter. Even in the drizzle, the rhythm of life carried a gentle beauty. Soft footsteps echoed as people moved with calm and comfort through the misty streets.`,
   },
   {
-    content: `At the edge of the forest, a small creek trickled over smooth stones, glinting in the sunlight. Birds chirped cheerfully from the trees, while leaves danced gently in the breeze. A family of deer grazed nearby, cautious but serene. Flowers of every color dotted the forest floor, adding splashes of vibrance to the greenery. Nature seemed to breathe in perfect harmony, creating a peaceful retreat from the noise of everyday life.`,
+    content: `A stream shimmered through the forest, surrounded by chirping birds and dancing leaves. Deer grazed quietly while flowers painted the ground with color. Nature moved in harmony, untouched and serene. Cool breeze and gentle sunlight created a peaceful refuge from the busy world beyond.`,
   },
   {
-    content: `In the quiet library, rows of books lined every wall, each filled with stories waiting to be discovered. The smell of aged paper mingled with the faint scent of polished wood. Students and readers whispered softly as they turned pages, completely absorbed in their worlds. Sunlight streamed through tall windows, casting warm patterns on the floors. Time seemed to slow in this haven of knowledge and imagination.`,
+    content: `Rows of books filled the silent library, each whispering its own story. Readers turned pages slowly, lost in thought. Sunlight poured through tall windows, wrapping the room in golden stillness. The air felt timeless as knowledge and imagination rested side by side.`,
   },
   {
-    content: `The market buzzed with energy as vendors called out their wares. Bright fruits and vegetables were stacked neatly on wooden crates. Shoppers moved from stall to stall, sampling flavors and chatting with friendly sellers. The smell of freshly baked bread and roasted spices filled the air. Music played from a nearby corner, adding a lively rhythm to the colorful scene.`,
+    content: `The market buzzed with cheerful noise as vendors displayed bright fruits and bread. Laughter and music echoed between stalls. Scents of spice and sweetness filled the lively air. Families wandered happily, enjoying flavors, colors, and friendly voices all around them.`,
   },
   {
-    content: `On the beach, waves rolled gently onto the sand, leaving behind tiny shells and sparkling foam. Children built sandcastles, laughing as they dug moats and towers. Seagulls swooped overhead, occasionally diving for small fish near the shore. The salty breeze mixed with the warm sun, creating a perfect summer afternoon. Everyone seemed to pause and enjoy the simplicity of the moment.`,
+    content: `Waves curled softly along the beach, leaving trails of foam behind. Children built castles while gulls soared overhead. The breeze carried the scent of salt and the sound of joy. Sunlight sparkled across the water as families relaxed under the warm summer sky.`,
   },
   {
-    content: `A small village nestled in the mountains, surrounded by pine forests and winding paths. Smoke rose from chimneys as families prepared their evening meals. The air smelled of woodfire and fresh herbs from gardens. Travelers passing through marveled at the serene landscape and the friendliness of the villagers. Nights were quiet, lit only by the glow of lanterns and stars above.`,
+    content: `A mountain village glowed under the setting sun, smoke rising from chimneys. Families shared meals and laughter inside wooden homes. Lanterns flickered as stars appeared above the quiet hills. Peace settled like a blanket, wrapping the valley in calm evening light.`,
   },
   {
-    content: `The train moved steadily through the countryside, passing fields of golden wheat and gentle hills. Passengers gazed out the windows, watching trees blur past in the fading sunlight. Conversations were soft, mingling with the rhythmic clatter of wheels on rails. A distant dog barked, and a church bell tolled somewhere ahead. Traveling brought a sense of calm, a temporary escape from the familiar.`,
+    content: `The train rolled through endless fields of gold beneath the fading sky. Passengers watched the world pass in rhythm with the rails. For a while, travel felt like peace in motion. Soft conversations and gentle movement brought comfort to everyone aboard.`,
   },
   {
-    content: `In the art studio, canvases of every size leaned against the walls, covered with bursts of color and creative expression. Paintbrushes, pencils, and pastels lay scattered on tables. Artists moved carefully around the room, focused on capturing emotion and imagination in each stroke. Light from tall windows illuminated the workspace, making colors shimmer and inspiring new ideas. The studio hummed with quiet energy and dedication.`,
+    content: `Paint and color filled the art studio where creativity bloomed. Artists worked in silence, focused on their visions. Sunlight streamed through wide windows, inspiring every brushstroke. Tools, sketches, and ideas filled the room with quiet creative energy.`,
   },
   {
-    content: `Evening settled over the city as streetlights flickered on, casting warm glows on cobblestone paths. People strolled leisurely, enjoying the cooling air and soft sounds of distant music. Cafés and restaurants glimmered with cozy lights, inviting friends and couples to gather. The sky shifted from deep blue to purple, dotted with early stars. The city seemed alive yet peaceful, a perfect end to a busy day.`,
+    content: `Evening lights shimmered on cobblestone streets as people strolled together. Cafes glowed softly, and music drifted through the air. The city breathed in calm after a long day. Warm laughter, soft footsteps, and gentle lights created a perfect night.`,
   },
 ];

@@ -9,13 +9,17 @@ import { Button } from "../ui/button";
 import { Card, CardContent, CardTitle } from "../ui/card";
 import { TimeLineType } from "@/Types/TimeLineType";
 import Link from "next/link";
+import ReactConfettiPage from "../ReactConfetti";
 
 const ResultPage = () => {
+
   const {
     context: { wpm, accuracy,textContent, timeline, wrongLetterIndex },
     actions: { resetTest },
   } = useTypeContext();
+  
   const router = useRouter();
+
 
 
   // reset action exposed via button (use inline onClick where needed)
@@ -44,6 +48,7 @@ const ResultPage = () => {
 
   return (
     <div className="w-full flex justify-center    flex-col h-full overflow-hidden py-10 px-24">
+      <ReactConfettiPage />
     <section className="text-center flex items-center justify-center gap-2 mb-10 flex-col " >
       <h1 className="text-2xl font-bold my-3" >Congratulations!! typing test completed. </h1>
      <div className="flex w-1/ justify-center gap-3  ">

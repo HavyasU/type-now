@@ -26,6 +26,7 @@ export interface TypingContextValueType {
     setTimer: Dispatch<SetStateAction<number>>;
     updateTimeLine:( second:number,wpm:number, accuracy:number, errors:number )=>void
     resetTest:()=>void
+    loadNewText: () => void;
   };
   ref: {
     letterIndexRef: MutableRefObject<number>;
@@ -49,7 +50,8 @@ export const TypingContext = createContext<TypingContextValueType>({
     updateWrongLetterIndex: () => {},
     setTimer: () => {},
     updateTimeLine:()=>{},
-    resetTest:()=>{}
+    resetTest:()=>{},
+    loadNewText: () => {},
   },
   ref: {
     letterIndexRef: { current: -1 },

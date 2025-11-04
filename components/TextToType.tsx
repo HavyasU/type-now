@@ -13,17 +13,17 @@ import GetColoredText from "./ColoredTextComponent";
 import { useTypeContext } from "@/context/TypingTestContext/TypingTestContextProvider";
 
 const TextToType = () => {
-  // const [random, setRandom] = useState<number>(0);
   const counterRef = useRef<CounterRef | null>(null);
 
   const {
     context: { visibleIndex, textContent, wrongLetterIndex },
     ref: { letterIndexRef },
 
-    actions: { setVisibleIndex, setTextContent, updateWrongLetterIndex },
+    actions: { setVisibleIndex, setTextContent, updateWrongLetterIndex, loadNewText },
   } = useTypeContext();
 
   const [keyPressed, setKeyPressed] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [isCapsLockEnabled, setIsCapsLockEnabled] = useState<boolean | null>(
     false
   );
@@ -32,6 +32,10 @@ const TextToType = () => {
     letterIndexRef.current = value;
     setVisibleIndex(value);
   };
+
+  useEffect(()=>{
+    loadNewText()
+  },[])
 
   const [typingStatus, setTypingStatus] =
     useState<typingStatusType>("no-started");
@@ -59,36 +63,72 @@ const TextToType = () => {
           letterIndexRef,
         },
       });
+      
     };
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [textContent, typingStatus, wrongLetterIndex]);
+
+const handleMobileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const value = e.target.value;
+  const lastChar = value[value.length - 1];
+  if (!lastChar) return;
+
+  keyDownEventHandler({
+    events: { e: { key: lastChar } as unknown as KeyboardEvent },
+    actions: {
+      setIsCapsLockEnabled,
+      setKeyPressed,
+      setTypingStatus,
+      updateLetterIndex,
+      updateWrongLetterIndex,
+    },
+    context: {
+      restrictedKeys: restrictedKeysData,
+      textContent,
+      typingStatus,
+      wrongLetterIndex,
+    },
+    refs: { counterRef, letterIndexRef },
+    isMobile: true, // 👈 Important flag
+  });
+
+  setTimeout(() => {
+    e.target.value = "";
+  }, 10);
+};
+
+  useEffect(() => {
+  const focusInput = () => inputRef.current?.focus();
+  window.addEventListener("touchstart", focusInput);
+  window.addEventListener("click", focusInput);
+  return () => {
+    window.removeEventListener("touchstart", focusInput);
+    window.removeEventListener("click", focusInput);
+  };
+}, []);
+
 
   const changeTypeTextHandler = () => {
     changeTypeText(letterIndexRef, setTextContent, setVisibleIndex);
   };
 
-  useEffect(() => {
-    console.log(keyPressed)
-  }, [keyPressed])
-
+  
   return (
-    <div className="px-10  h-[80vh] w-full flex flex-col justify-center items-center ">
-      <div className="w-full  h-1/5 flex gap-5 flex-col justify-center items-center    ">
-        <div className="h-1/2 w-full">
+    <div className="px-10 max-lg:px-5  h-[80vh] mt-5 w-full flex flex-col justify-center items-center ">
+      <div className="w-full   flex gap-1 flex-col justify-center items-center    ">
            <TestPageControls
           counterRef={counterRef} 
           isCapsLockEnabled={isCapsLockEnabled}
           changeTypeText={changeTypeTextHandler}
         />
-        </div>
         <div className="flex flex-col justify-center select-none h-1/2  items-center overflow-hidden">
           <h2 className="text-2xl  ">
             {keyPressed && keyPressed !== textContent[visibleIndex + 1] && (
-              <div className="text-center flex min-h-14 justify-center items-center  gap-3 ">
+              <div  className="text-center flex min-h-14 justify-center items-center  gap-3 ">
                 <div className="text-white text-2xl rounded-lg  h-10 w-full px-5 text-center items-center flex justify-center  bg-red-500 font-bold">
                   <p> {keyPressed == " " ? " Space " : " " + keyPressed + " "}</p>
                 </div>
@@ -103,14 +143,21 @@ const TextToType = () => {
 
 
           </h2>
+             <input
+            ref={inputRef}
+            type="text"
+            className="absolute opacity-0 h-0 w-0"
+            onChange={handleMobileInput}
+            autoFocus
+          />
         </div>
       </div>
-      <div className="text-white select-none p-6 rounded-md  montserrat-font   text-justify   font-serif font-semibold  text-2xl  ">
+      <div className="text-white select-none p-6 max-lg:px-0 max-lg:py-2 rounded-md  montserrat-font   text-justify   font-serif font-semibold  text-2xl  ">
         <h3 style={
           {
-            letterSpacing: "4px"
+            letterSpacing: "2px"
           }
-        } className=" px-28 tracking-wider select-none min-h-1/2 leading-14 ">
+        } className=" px-28 max-lg:px-0 tracking-wider select-none h-3/4 leading-14  max-md:text-xl max-md:tracking-tight max-md:leading-10">
           {/* {getColoredText(textContent, visibleIndex, letterIndexRef)} */}
 
           <GetColoredText

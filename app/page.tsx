@@ -5,7 +5,7 @@ import Hero from "@/components/Hero";
 const page = () => {
   return (
     <div className="">
-      <div className="w-full   select-none min-h-[90vh] flex flex-col justify-center items-center">
+      <div className="w-full   select-none min-h-[90vh] max-md:min-h-[70vh] flex flex-col justify-center items-center">
         <Hero />
       </div>
       {/* <div className="footer bg-black p-4 w-full flex justify-between items-start ">

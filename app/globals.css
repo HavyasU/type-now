@@ -148,6 +148,7 @@
 
 body {
   background-color: #09090b;
+  min-height: 100vh;
   color: white !important;
   /* margin-top: 5rem; */
 }

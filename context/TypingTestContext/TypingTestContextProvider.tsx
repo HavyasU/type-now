@@ -1,6 +1,6 @@
 "use client";
 
-import React, {  useContext, useEffect, useRef, useState } from "react";
+import React, {  useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { TypingContext, TypingContextValueType } from "./TypingTestContext";
 import { TextDataSet } from "@/components/Data/TextData";
 import { getRandomNumber } from "@/utils/TypetestPage.utils";
@@ -13,10 +13,7 @@ export const TypingContextProvider = ({
 }) => {
   const [wpm, setWpm] = useState(0);
   const [accuracy, setAccuracy] = useState(0);  
-  const [textContent, setTextContent] = useState(() => {
-    const randomIndex = getRandomNumber();
-    return TextDataSet[randomIndex].content;
-  });
+  const [textContent, setTextContent] = useState("")
   const [visibleIndex, setVisibleIndex] = useState<number>(-1);
   const letterIndexRef = useRef(-1);
   const [wrongLetterIndex, setWrongLetterIndex] = useState<number[]>([]);
@@ -24,11 +21,19 @@ export const TypingContextProvider = ({
   const [timer, setTimer] = useState<number>(30); 
   const [timeline,setTimeLine]  = useState<TimeLineType>([])
 
+ 
 
   const setResults = (wpm: number, accuracy: number) => {
   setAccuracy(accuracy);
   setWpm(wpm);
   }
+
+  const loadNewText = ()=>{
+    const randomIndex = getRandomNumber();
+    setTextContent(TextDataSet[randomIndex].content);
+  }
+
+  
 
   const updateWrongLetterIndex = (value: number) => {
     if (value >= 0 && value < textContent.length) {
@@ -66,7 +71,8 @@ export const TypingContextProvider = ({
       updateWrongLetterIndex,
       setTimer,
       updateTimeLine,
-      resetTest
+      resetTest,
+      loadNewText
     },
     context: {
       accuracy,

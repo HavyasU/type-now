@@ -1,14 +1,14 @@
 import { TextDataSet } from "@/components/Data/TextData";
 import { playSound } from "./Playsound.util";
-import React, { useEffect } from "react";
 import keyDownEventHandlerParameters from "@/Types/TypingTest.types";
 
 export const changeTypeText = (
   letterIndexRef: React.MutableRefObject<number>,
   setTextContent: (textContent: string) => void,
-  setVisibleIndex: (num: number) => void,
+  setVisibleIndex: (num: number) => void
 ) => {
-  setTextContent(TextDataSet[Math.floor(Math.random() * 10)].content);
+  const idx = getRandomNumber();
+  setTextContent(TextDataSet[idx].content);
   setVisibleIndex(-1);
   letterIndexRef.current = -1;
 };
@@ -18,7 +18,7 @@ export const keyDownEventHandler = ({
   context,
   events,
   refs,
-}: keyDownEventHandlerParameters) => {
+}: keyDownEventHandlerParameters & { isMobile?: boolean }) => {
   const {
     setIsCapsLockEnabled,
     setKeyPressed,
@@ -29,39 +29,50 @@ export const keyDownEventHandler = ({
   const { restrictedKeys, textContent } = context;
   const { e } = events;
   const { counterRef, letterIndexRef } = refs;
-  const isKeyExists = restrictedKeys.some((ele) => ele == e.key);
-  setIsCapsLockEnabled(e.getModifierState("CapsLock"));
-  if (e.key === "Backspace") {
+
+  // --- Detect event type ---
+  const isMobileEvent = !(e as KeyboardEvent).getModifierState;
+  const key = e.key;
+
+  // --- Update Caps Lock only on desktop ---
+  if (!isMobileEvent && (e as KeyboardEvent).getModifierState) {
+    setIsCapsLockEnabled((e as KeyboardEvent).getModifierState("CapsLock"));
+  }
+
+  // --- Ignore restricted keys ---
+  const isRestricted = restrictedKeys.some((ele) => ele === key);
+  if (isRestricted) return;
+
+  // --- Handle Backspace ---
+  if (key === "Backspace") {
     const newIndex = Math.max(letterIndexRef.current - 1, -1);
     updateLetterIndex(newIndex);
-  } else {
-    
+    return;
   }
-  
-  if (!isKeyExists) {
-      const nextIndex = letterIndexRef.current + 1;
-      setKeyPressed(e.key);
-      
-      if (nextIndex < textContent.length) {
-        if (e.key === textContent[nextIndex]) {
-          if (letterIndexRef.current == -1) {
-            counterRef.current?.callStartTimerFunction();
-          }
-          playSound("/assets/audios/type-sound.wav");
-          updateLetterIndex(nextIndex);
-          setKeyPressed(textContent[nextIndex+1]);
-        } else {
-          updateWrongLetterIndex(nextIndex);
-          setKeyPressed(e.key);
-        }
-        e.preventDefault();
+
+  // --- Main typing logic ---
+  const nextIndex = letterIndexRef.current + 1;
+  setKeyPressed(key);
+
+  if (nextIndex < textContent.length) {
+    if (key === textContent[nextIndex]) {
+      if (letterIndexRef.current === -1) {
+        counterRef.current?.callStartTimerFunction();
       }
+      playSound("/assets/audios/type-sound.wav");
+      updateLetterIndex(nextIndex);
+      setKeyPressed(textContent[nextIndex + 1]);
+    } else {
+      updateWrongLetterIndex(nextIndex);
+      setKeyPressed(key);
     }
+
+    // Prevent default only for real keyboard events
+    if (!isMobileEvent) e.preventDefault?.();
+  }
 };
 
-
 export const getRandomNumber = () => {
-  // return 0;
-  // const random = Math.floor(Math.random() * length);
-  return 7;
+  const len = TextDataSet.length || 10; // fallback
+  return Math.floor(Math.random() * len);
 };

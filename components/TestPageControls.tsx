@@ -14,7 +14,7 @@ const TestPageControls = ({
   changeTypeText: () => void;
 }) => {
   return (
-    <div className="controls  items-center justify-center flex gap-2  h-1/5 w-full  ">
+    <div className="controls  items-center justify-center flex gap-2  h-fit w-full  ">
        <div className="">
         <Counter
         ref={counterRef}

@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import { TypingContextProvider } from "@/context/TypingTestContext/TypingTestContextProvider";
+import { TextDataSet } from "@/components/Data/TextData";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,6 +21,8 @@ export const metadata: Metadata = {
   description: "Type-Now is a Typing Test Taking Site.",
 };
 
+const initialRandomNumber = Math.floor(Math.random() * TextDataSet.length)
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,12 +30,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <TypingContextProvider>
+      <TypingContextProvider  >
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <>
             <Header />
             {children}
+            <Footer />
           </>
         </body>
       </TypingContextProvider>
