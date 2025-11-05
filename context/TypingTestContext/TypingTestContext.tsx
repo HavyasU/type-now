@@ -44,7 +44,8 @@ export const TypingContext = createContext<TypingContextValueType>({
     textContent: "",
     wrongLetterIndex: [],
     timeline: [{ second:0, wpm:0, accuracy:0, errors:0}],
-    timer:0
+    timer:0,
+    typingStatus:"no-started",
   },
   actions: {
     setResults: () => {},
