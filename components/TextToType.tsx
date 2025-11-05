@@ -7,7 +7,6 @@ import {
   keyDownEventHandler,
 } from "@/utils/TypetestPage.utils";
 import { restrictedKeysData } from "@/constants/RestrictedKeys.costants";
-import { typingStatusType } from "@/constants/typing.constants";
 import { CounterRef } from "./Counter";
 import GetColoredText from "./ColoredTextComponent";
 import { useTypeContext } from "@/context/TypingTestContext/TypingTestContextProvider";
@@ -16,10 +15,10 @@ const TextToType = () => {
   const counterRef = useRef<CounterRef | null>(null);
 
   const {
-    context: { visibleIndex, textContent, wrongLetterIndex },
+    context: { visibleIndex, textContent, wrongLetterIndex ,typingStatus},
     ref: { letterIndexRef },
 
-    actions: { setVisibleIndex, setTextContent, updateWrongLetterIndex, loadNewText },
+    actions: { setVisibleIndex, setTextContent, updateWrongLetterIndex, loadNewText ,setTypingStatus},
   } = useTypeContext();
 
   const [keyPressed, setKeyPressed] = useState<string>("");
@@ -37,8 +36,7 @@ const TextToType = () => {
     loadNewText()
   },[])
 
-  const [typingStatus, setTypingStatus] =
-    useState<typingStatusType>("no-started");
+  
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       keyDownEventHandler({
@@ -70,7 +68,7 @@ const TextToType = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [textContent, typingStatus, wrongLetterIndex]);
+  }, [textContent, typingStatus, wrongLetterIndex, counterRef, letterIndexRef, updateWrongLetterIndex, setTypingStatus]);
 
 const handleMobileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
   const value = e.target.value;
@@ -118,8 +116,8 @@ const handleMobileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 
   
   return (
-    <div className="px-10 max-lg:px-5  h-[80vh] mt-5 w-full flex flex-col justify-center items-center ">
-      <div className="w-full   flex gap-1 flex-col justify-center items-center    ">
+    <div className="px-10 max-lg:px-5   h-[80vh] mt-3 w-full flex flex-col justify-center items-center ">
+      <div className="w-full max-md:h-[10vh]  h-fit flex gap-1 flex-col justify-center items-center    ">
            <TestPageControls
           counterRef={counterRef} 
           isCapsLockEnabled={isCapsLockEnabled}
@@ -129,10 +127,10 @@ const handleMobileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
           <h2 className="text-2xl  ">
             {keyPressed && keyPressed !== textContent[visibleIndex + 1] && (
               <div  className="text-center flex min-h-14 justify-center items-center  gap-3 ">
-                <div className="text-white text-2xl rounded-lg  h-10 w-full px-5 text-center items-center flex justify-center  bg-red-500 font-bold">
+                <div className="text-white text-2xl rounded-lg max-md:h-5 max-md:px-3 max-md:text-lg  h-10 w-full px-5 text-center items-center flex justify-center  bg-red-500 font-bold">
                   <p> {keyPressed == " " ? " Space " : " " + keyPressed + " "}</p>
                 </div>
-                <div className="text-white text-2xl rounded-lg h-10 w-full  px-5 text-center items-center flex justify-center  bg-green-500 font-bold">
+                <div className="text-white text-2xl rounded-lg max-md:h-5 max-md:px-3 max-md:text-lg h-10 w-full  px-5 text-center items-center flex justify-center  bg-green-500 font-bold">
 
                   <p>  {textContent[visibleIndex + 1] == " "
                     ? " Space "
@@ -157,7 +155,7 @@ const handleMobileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
           {
             letterSpacing: "2px"
           }
-        } className=" px-28 max-lg:px-0 tracking-wider select-none h-3/4 leading-14  max-md:text-xl max-md:tracking-tight max-md:leading-10">
+        } className=" px-28 max-lg:px-0 tracking-wider max-md:mt-3 select-none h-3/4 leading-14  max-md:text-lg  max-md:tracking-tighter max-md:leading-7">
           {/* {getColoredText(textContent, visibleIndex, letterIndexRef)} */}
 
           <GetColoredText

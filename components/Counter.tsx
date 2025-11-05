@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState,
 } from "react";
 import { Button } from "./ui/button";
 import { TypingContext } from "@/context/TypingTestContext/TypingTestContext";
@@ -18,8 +17,8 @@ export interface CounterRef {
 const Counter = forwardRef((props, ref) => {
   const router = useRouter();
   const {
-    actions: { setResults, setTimer, updateTimeLine },
-    context: { wrongLetterIndex, timer },
+    actions: { setResults, setTimer, updateTimeLine,setTypingStatus },
+    context: { wrongLetterIndex, timer , typingStatus},
     ref: { letterIndexRef },
   } = useContext(TypingContext);
 
@@ -41,9 +40,16 @@ const Counter = forwardRef((props, ref) => {
   useEffect(()=>{
     if(timer==0)
     {
+      setTypingStatus("ended") 
+    }
+  },[timer, setTypingStatus])
+
+
+  useEffect(()=>{
+    if(typingStatus=="ended"){
       router.push("/type-test/result")
     }
-  },[timer, router])
+  },[typingStatus, router])
 
   const startTimerFunction = () => {
     if (intervalRef.current) clearInterval(intervalRef.current!)

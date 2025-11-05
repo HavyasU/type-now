@@ -1,5 +1,6 @@
 "use client";
 
+import { typingStatusType } from "@/constants/typing.constants";
 import { TimeLineType } from "@/Types/TimeLineType";
 import React, {
   createContext,
@@ -17,6 +18,7 @@ export interface TypingContextValueType {
     wrongLetterIndex: number[];
     timer: number;
     timeline?: TimeLineType ;
+    typingStatus: typingStatusType;
   };
   actions: {
     setResults: (wpm: number, accuracy: number) => void;
@@ -27,6 +29,7 @@ export interface TypingContextValueType {
     updateTimeLine:( second:number,wpm:number, accuracy:number, errors:number )=>void
     resetTest:()=>void
     loadNewText: () => void;
+    setTypingStatus:Dispatch<SetStateAction<typingStatusType>>
   };
   ref: {
     letterIndexRef: MutableRefObject<number>;
@@ -52,6 +55,7 @@ export const TypingContext = createContext<TypingContextValueType>({
     updateTimeLine:()=>{},
     resetTest:()=>{},
     loadNewText: () => {},
+    setTypingStatus:()=>{}
   },
   ref: {
     letterIndexRef: { current: -1 },

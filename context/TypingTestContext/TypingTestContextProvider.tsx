@@ -5,6 +5,7 @@ import { TypingContext, TypingContextValueType } from "./TypingTestContext";
 import { TextDataSet } from "@/components/Data/TextData";
 import { getRandomNumber } from "@/utils/TypetestPage.utils";
 import { TimeLineType } from "@/Types/TimeLineType";
+import { typingStatusType } from "@/constants/typing.constants";
 
 export const TypingContextProvider = ({
   children,
@@ -20,6 +21,8 @@ export const TypingContextProvider = ({
   //NOTE: Timer in seconds
   const [timer, setTimer] = useState<number>(30); 
   const [timeline,setTimeLine]  = useState<TimeLineType>([])
+  const [typingStatus, setTypingStatus] =
+    useState<typingStatusType>("no-started");
 
  
 
@@ -60,6 +63,7 @@ export const TypingContextProvider = ({
     setWrongLetterIndex([]);
     setWpm(0);
     setAccuracy(0);
+    setTypingStatus("no-started")
   }
 
 
@@ -72,7 +76,8 @@ export const TypingContextProvider = ({
       setTimer,
       updateTimeLine,
       resetTest,
-      loadNewText
+      loadNewText,
+      setTypingStatus
     },
     context: {
       accuracy,
@@ -82,7 +87,7 @@ export const TypingContextProvider = ({
       wrongLetterIndex,
       timeline,
       timer,
-      
+      typingStatus
     },
     ref: {
       letterIndexRef,

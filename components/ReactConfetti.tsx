@@ -21,9 +21,9 @@ export default function ReactConfettiPage() {
   }, []);
 
   return (
-    <div className="w-full flex justify-center flex-col h-full overflow-hidden py-10 px-24">
+    <div className="">
       {windowSize.width > 0 && (
-        <ReactConfetti width={windowSize.width} height={windowSize.height} />
+        <ReactConfetti numberOfPieces={28}  width={windowSize.width} height={windowSize.height} />
       )}
       {/* other result content */}
     </div>

@@ -24,9 +24,10 @@ export const keyDownEventHandler = ({
     setKeyPressed,
     updateLetterIndex,
     updateWrongLetterIndex,
+    setTypingStatus,
   } = actions;
 
-  const { restrictedKeys, textContent } = context;
+  const { restrictedKeys, textContent , } = context;
   const { e } = events;
   const { counterRef, letterIndexRef } = refs;
 
@@ -58,6 +59,7 @@ export const keyDownEventHandler = ({
     if (key === textContent[nextIndex]) {
       if (letterIndexRef.current === -1) {
         counterRef.current?.callStartTimerFunction();
+        setTypingStatus("started")
       }
       playSound("/assets/audios/type-sound.wav");
       updateLetterIndex(nextIndex);
