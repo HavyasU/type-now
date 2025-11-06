@@ -3,7 +3,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div className=' flex justify-center min-h-40 items-center flex-col bg-black' >
+        <div className=' flex justify-center min-h-40  items-center flex-col bg-black' >
           <section>
                 <div className=" mx-3 flex gap-2 flex-row w-fit h-full">
         <Keyboard />

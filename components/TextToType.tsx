@@ -10,6 +10,7 @@ import { restrictedKeysData } from "@/constants/RestrictedKeys.costants";
 import { CounterRef } from "./Counter";
 import GetColoredText from "./ColoredTextComponent";
 import { useTypeContext } from "@/context/TypingTestContext/TypingTestContextProvider";
+import { Card, CardContent } from "./ui/card";
 
 const TextToType = () => {
   const counterRef = useRef<CounterRef | null>(null);
@@ -117,29 +118,15 @@ const handleMobileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
   
   return (
     <div className="px-10 max-lg:px-5   h-[80vh] mt-3 w-full flex flex-col justify-center items-center ">
-      <div className="w-full max-md:h-[10vh]  h-fit flex gap-1 flex-col justify-center items-center    ">
+      <div className="w-full  max-md:h-fit max-sm:mt-5 h-fit flex gap-1 flex-col justify-center items-center    ">
            <TestPageControls
           counterRef={counterRef} 
           isCapsLockEnabled={isCapsLockEnabled}
           changeTypeText={changeTypeTextHandler}
         />
-        <div className="flex flex-col justify-center select-none h-1/2  items-center overflow-hidden">
+        <div className="flex flex-col justify-center select-none min-h-fit  items-center overflow-hidden">
           <h2 className="text-2xl  ">
-            {keyPressed && keyPressed !== textContent[visibleIndex] && (
-              <div  className="text-center flex min-h-14 justify-center items-center  gap-3 ">
-                <div className="text-white text-2xl rounded-lg max-md:h-5 max-md:px-3 max-md:text-lg  h-10 w-full px-5 text-center items-center flex justify-center  bg-red-500 font-bold">
-                  <p> {keyPressed == " " ? " Space " : " " + keyPressed + " "}</p>
-                </div>
-                <div className="text-white text-2xl rounded-lg max-md:h-5 max-md:px-3 max-md:text-lg h-10 w-full  px-5 text-center items-center flex justify-center  bg-green-500 font-bold">
-
-                  <p>  {textContent[visibleIndex + 1] == " "
-                    ? " Space "
-                    : " " + textContent[visibleIndex + 1] + ""}</p>
-                </div>
-              </div>
-            )}
-
-
+           
           </h2>
              <input
             ref={inputRef}
@@ -151,22 +138,33 @@ const handleMobileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         </div>
       </div>
       <div className="">
-      <p>{wpm}</p>
-      <p>{accuracy}</p>
       </div>
-      <div className="text-white select-none p-6 max-lg:px-0 max-lg:py-2 rounded-md  montserrat-font   text-justify   font-serif font-semibold  text-2xl  ">
+      <div className="text-white select-none p-6 max-lg:px-0 max-lg:py-2 rounded-md fira-code-font  max  text-justify   font-serif   text-3xl  ">
         <h3 style={
           {
             letterSpacing: "2px"
           }
-        } className=" px-28 max-lg:px-0 tracking-wider max-md:mt-3 select-none h-3/4 leading-14  max-md:text-lg  max-md:tracking-tighter max-md:leading-7">
+        } className=" w-full px-28 max-lg:px-0 tracking-wider max-md:mt-3 select-none h-3/4 leading-14  max-md:text-xl  max-md:tracking-tight max-md:leading-7">
           {/* {getColoredText(textContent, visibleIndex, letterIndexRef)} */}
 
-          <GetColoredText
+          <Card className="bg-zinc-950 text-white min-h-80 min-w-[80vw] " >
+            <CardContent>
+             {
+              (!textContent)? 
+              (
+                <p className="text-start " >Text’s walking here, chill!</p>
+              )
+              :
+              (
+                 <GetColoredText
             textContent={textContent}
             letterIndexRef={letterIndexRef}
             visibleIndex={visibleIndex}
           />
+              )
+             }
+            </CardContent>
+          </Card>
         </h3>
       </div>
 

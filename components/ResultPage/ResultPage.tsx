@@ -71,12 +71,12 @@ const ResultPage = () => {
         })}
 
       </div>
-      <div className="h-full ">
+      <div className="h-full md:h- flex justify-center flex-col items-center ">
             <LineChart width={"100%"}     
  responsive style={{
           width: "90vw",
           margin: "auto",
-          height:"40vh",
+          height:"100%",
           aspectRatio: 2,
           maxWidth: 750,
           maxHeight: 900,

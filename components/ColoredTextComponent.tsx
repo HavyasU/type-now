@@ -1,5 +1,6 @@
 "use client";
 
+import { useTypeContext } from "@/context/TypingTestContext/TypingTestContextProvider";
 import clsx from "clsx";
 
 interface GetColoredTextProps {
@@ -18,6 +19,8 @@ const GetColoredText = ({
   //   () => letterIndexRef.current,
   //   [letterIndexRef.current],
   // );
+
+  const {context:{wrongLetterIndex}} = useTypeContext()
   return (
     <>
       {textContent.split("").map((letter, index) => {
@@ -32,7 +35,8 @@ const GetColoredText = ({
             key={index}
             className={clsx(
               "transition-colors duration-150",
-              isTyped ? "text-white bg-stone-700" : "",
+              isTyped &&  (!wrongLetterIndex.some((ele) => ele==index)) ? "disappear-animation" : "",
+              (wrongLetterIndex.some((ele) => ele==index)) ? "text-red-500 no-disappear-animation opacity-100 " : "",
               showCursor ? "cursor" : "",
             )}>
             {letter}

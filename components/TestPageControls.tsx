@@ -33,7 +33,7 @@ const TestPageControls = ({
         style={{
           textShadow: "2px 3px 20px white",
         }}
-        className="text-2xl text-red-400 font-bold">
+        className="text-2xl max-md:hidden text-red-400 font-bold">
         <Button
           className={
             `${
