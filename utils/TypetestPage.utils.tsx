@@ -1,7 +1,7 @@
 // utils/TypetestPage.utils.ts
 import { TextDataSet } from "@/components/Data/TextData";
 import { playSound } from "./Playsound.util";
-import type { keyDownEventHandlerParameters } from "@/Types/TypingTest.types";
+import type  keyDownEventHandlerParameters  from "@/Types/TypingTest.types";
 
 // --- Helper: Safe random index ---
 export const getRandomNumber = () => {
