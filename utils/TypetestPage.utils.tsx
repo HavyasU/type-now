@@ -12,12 +12,14 @@ export const getRandomNumber = () => {
 export const changeTypeText = (
   letterIndexRef: React.MutableRefObject<number>,
   setTextContent: (text: string) => void,
-  setVisibleIndex: (num: number) => void
+  setVisibleIndex: (num: number) => void,
+  clearWrongLetterIndex:()=>void
 ) => {
   const idx = getRandomNumber();
   setTextContent(TextDataSet[idx].content);
   setVisibleIndex(-1);
   letterIndexRef.current = -1;
+  clearWrongLetterIndex();
 };
 
 // --- Main Key Handler ---

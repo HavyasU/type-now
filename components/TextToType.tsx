@@ -19,7 +19,7 @@ const TextToType = () => {
     context: { visibleIndex, textContent, wrongLetterIndex ,typingStatus, wpm , accuracy},
     ref: { letterIndexRef },
 
-    actions: { setVisibleIndex, setTextContent, updateWrongLetterIndex, loadNewText ,setTypingStatus},
+    actions: { setVisibleIndex, setTextContent, updateWrongLetterIndex, loadNewText ,setTypingStatus,clearWrongLetterIndex},
   } = useTypeContext();
 
   const [keyPressed, setKeyPressed] = useState<string>("");
@@ -112,7 +112,7 @@ const handleMobileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 
   const changeTypeTextHandler = () => {
-    changeTypeText(letterIndexRef, setTextContent, setVisibleIndex);
+    changeTypeText(letterIndexRef, setTextContent, setVisibleIndex,clearWrongLetterIndex);
   };
 
   

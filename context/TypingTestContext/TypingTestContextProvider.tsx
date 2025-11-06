@@ -45,9 +45,11 @@ export const TypingContextProvider = ({
       );
     }
 
-
-     
   };
+
+  const clearWrongLetterIndex = ()=>{
+    setWrongLetterIndex([])
+  }
 
   const updateTimeLine = ( second:number,wpm:number, accuracy:number, errors:number ) => {
     setTimeLine((prev)=>[...prev,{second, wpm, accuracy, errors}]);
@@ -77,7 +79,8 @@ export const TypingContextProvider = ({
       updateTimeLine,
       resetTest,
       loadNewText,
-      setTypingStatus
+      setTypingStatus,
+      clearWrongLetterIndex
     },
     context: {
       accuracy,
