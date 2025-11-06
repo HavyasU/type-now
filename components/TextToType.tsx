@@ -15,7 +15,7 @@ const TextToType = () => {
   const counterRef = useRef<CounterRef | null>(null);
 
   const {
-    context: { visibleIndex, textContent, wrongLetterIndex ,typingStatus},
+    context: { visibleIndex, textContent, wrongLetterIndex ,typingStatus, wpm , accuracy},
     ref: { letterIndexRef },
 
     actions: { setVisibleIndex, setTextContent, updateWrongLetterIndex, loadNewText ,setTypingStatus},
@@ -125,7 +125,7 @@ const handleMobileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         />
         <div className="flex flex-col justify-center select-none h-1/2  items-center overflow-hidden">
           <h2 className="text-2xl  ">
-            {keyPressed && keyPressed !== textContent[visibleIndex + 1] && (
+            {keyPressed && keyPressed !== textContent[visibleIndex] && (
               <div  className="text-center flex min-h-14 justify-center items-center  gap-3 ">
                 <div className="text-white text-2xl rounded-lg max-md:h-5 max-md:px-3 max-md:text-lg  h-10 w-full px-5 text-center items-center flex justify-center  bg-red-500 font-bold">
                   <p> {keyPressed == " " ? " Space " : " " + keyPressed + " "}</p>
@@ -149,6 +149,10 @@ const handleMobileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
             autoFocus
           />
         </div>
+      </div>
+      <div className="">
+      <p>{wpm}</p>
+      <p>{accuracy}</p>
       </div>
       <div className="text-white select-none p-6 max-lg:px-0 max-lg:py-2 rounded-md  montserrat-font   text-justify   font-serif font-semibold  text-2xl  ">
         <h3 style={

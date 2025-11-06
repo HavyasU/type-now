@@ -37,7 +37,7 @@ const ResultPage = () => {
 
   useEffect(()=>{
     if(typingStatus !== "ended"){
-      // router.push("/type-test")
+      router.push("/type-test")
     }
   },[typingStatus,router])
 

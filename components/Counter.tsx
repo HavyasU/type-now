@@ -51,38 +51,46 @@ const Counter = forwardRef((props, ref) => {
     }
   },[typingStatus, router])
 
-  const startTimerFunction = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current!)
+ const startTimerFunction = () => {
+  if (intervalRef.current) clearInterval(intervalRef.current);
 
-    intervalRef.current = setInterval(() => {
-      // Use functional updater to ensure we base on the latest prev value
-      setTimer((prev) => {
-        const nextTime = prev - 1;
+  // Capture the start time
+  const startTime = Date.now();
+  const initialTimer = latestTimerRef.current; // e.g., 30
 
-        // read latest values from refs/context
-        const totalTyped = Math.max(0, letterIndexRef.current + 1);
-        const wrongCount = latestWrongRef.current.length;
-        const correctCount = Math.max(0, totalTyped - wrongCount);
+  intervalRef.current = setInterval(() => {
+    setTimer((prev) => {
+      const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+      const remaining = Math.max(0, initialTimer - elapsedSeconds);
+      const nextTime = remaining > 0 ? remaining : 0;
 
-        // elapsed minutes (we track from 60 seconds total; adjust if timer not 60)
-        const minutes = (timer - prev) / 60;
-        const wpm = minutes > 0 ? (correctCount / 5) / minutes : 0;
-        const accuracy = totalTyped > 0 ? Math.max(0, Math.min(100, (correctCount / totalTyped) * 100)) : 0;
+      // Use latest values from refs
+      const totalTyped = Math.max(0, letterIndexRef.current + 1);
+      const wrongCount = latestWrongRef.current.length;
+      const correctCount = Math.max(0, totalTyped - wrongCount);
 
-        // push to timeline with current second (prev) and current stats
-        updateTimeLine(prev, Math.round(wpm), Math.round(accuracy), wrongCount);
+      // Elapsed time in minutes
+      const minutes = elapsedSeconds / 60;
+      const wpm = minutes > 0 ? Math.round((correctCount / 5) / minutes) : 0;
+      const accuracy = totalTyped > 0 
+        ? Math.round(Math.max(0, Math.min(100, (correctCount / totalTyped) * 100))) 
+        : 0;
 
-        if (nextTime <= 0) {
-          setResults(Math.round(wpm), Math.round(accuracy));
-          if (intervalRef.current) clearInterval(intervalRef.current);
-          return 0;
-        }
+      // Update timeline with current elapsed second and stats
+      updateTimeLine(elapsedSeconds, wpm, accuracy, wrongCount);
+      setResults(wpm, accuracy);
 
-        return nextTime;
-      });
-    }, 1000);
-  }
+      // Stop timer when time's up
+      if (nextTime <= 0) {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        setTypingStatus("ended"); // Ensure status is updated
+        return 0;
+      }
 
+      return nextTime;
+    });
+  }, 1000);
+};
 
   useImperativeHandle(ref, () => ({
     callStartTimerFunction: startTimerFunction,
