@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { TypingContextProvider } from "@/context/TypingTestContext/TypingTestContextProvider";
 import { TextDataSet } from "@/components/Data/TextData";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <>
             <Header />
+            <Analytics/>
             {children}
             <Footer />
           </>

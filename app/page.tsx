@@ -7,6 +7,7 @@ const page = () => {
     <div className="">
       <div className="w-full   select-none min-h-[90vh] max-md:min-h-[70vh] flex flex-col justify-center items-center">
         <Hero />
+        {/* <LandingPage/> */}
       </div>
       {/* <div className="footer bg-black p-4 w-full flex justify-between items-start ">
         <div className="">
