@@ -101,6 +101,7 @@ export const keyDownEventHandler = ({
     if (!wrongLetterIndex.includes(nextIdx)) {
       updateWrongLetterIndex(nextIdx);
     }
+    updateLetterIndex(nextIdx)
   }
 
   // --- Show feedback: pressed vs expected ---
